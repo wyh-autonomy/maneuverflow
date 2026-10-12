@@ -1,0 +1,40 @@
+cff-version: 1.2.0
+message: "If you use ManeuverFlow in your research, please cite the paper below."
+type: software
+title: "ManeuverFlow: NAVSIM v1 Inference Release"
+version: "1.0.0-inference"
+date-released: 2026-08-18
+authors:
+  - family-names: "LatentPilot"
+url: "https://github.com/wyh-autonomy/maneuverflow"
+repository-code: "https://github.com/wyh-autonomy/maneuverflow"
+license: Apache-2.0
+preferred-citation:
+  type: article
+  title: "ManeuverFlow: Maneuver Hypothesis Generation with Future Evidence for Trajectory Evaluation and Refinement in End-to-End Autonomous Driving"
+  authors:
+    - family-names: "Wei"
+      given-names: "Yuhao"
+    - family-names: "Chen"
+      given-names: "Yong"
+    - family-names: "Yang"
+      given-names: "Chen"
+    - family-names: "Wang"
+      given-names: "Yingchen"
+    - family-names: "Ouyang"
+      given-names: "Delin"
+    - family-names: "Qi"
+      given-names: "Lingfeng"
+    - family-names: "Lan"
+      given-names: "Qi"
+    - family-names: "Zhang"
+      given-names: "Zhanhua"
+    - family-names: "Li"
+      given-names: "Jie"
+    - family-names: "Li"
+      given-names: "Guofa"
+  year: 2026
+  month: 10
+  journal: "arXiv"
+  doi: "10.48550/arXiv.2610.13409"
+  url: "https://arxiv.org/abs/2610.13409"

@@ -1,0 +1,26 @@
+_target_: navsim.agents.maneuverflow.agent.ManeuverFlowAgent
+_convert_: all
+
+config:
+  _target_: navsim.agents.maneuverflow.config.ManeuverFlowConfig
+  _convert_: all
+  training_phase: inference
+  mgmp_assets_from_checkpoint: true
+  move_to_inference_device_on_initialize: true
+  inference_device: auto
+  ecfr_max_ds: 1.0
+  ecfr_max_dl: 0.8
+  ecfr_max_dpsi: 0.35
+  ecfr_final_pool_composition: source_replacement
+  refined_score_delta_cost_xy: 0.0
+  refined_score_delta_cost_yaw: 0.0
+  refined_score_delta_cost_smooth: 0.0
+
+trajectory_sampling:
+  _target_: nuplan.planning.simulation.trajectory.trajectory_sampling.TrajectorySampling
+  _convert_: all
+  time_horizon: 4
+  interval_length: 0.5
+
+checkpoint_path: null
+initialize_from_checkpoint: false

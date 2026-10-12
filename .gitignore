@@ -1,0 +1,46 @@
+# Python and development tools
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+.coverage.*
+.pydevproject
+.vscode/
+*.egg-info/
+build/
+dist/
+
+# Local data and generated runs
+/dataset/
+/exp/
+/cache/
+/analysis/
+/results/
+/assets/mgmp_prior/
+/metric_cache/
+/submission_output/
+/score_output/
+wandb/
+lightning_logs/
+outputs/
+multirun/
+*.log
+*.pkl
+*.npy
+*.npz
+*.jpg
+*.pcd
+*.ckpt
+*.pt
+!/checkpoints/maneuverflow_tf_0.906.pt
+
+# Local credentials
+.env
+.env.*
+.envrc
+.netrc
+.npmrc
+.pypirc
+.hf_token

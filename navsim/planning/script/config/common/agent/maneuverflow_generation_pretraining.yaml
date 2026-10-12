@@ -1,0 +1,27 @@
+_target_: navsim.agents.maneuverflow.agent.ManeuverFlowAgent
+_convert_: all
+
+config:
+  _target_: navsim.agents.maneuverflow.config.ManeuverFlowConfig
+  _convert_: all
+  training_phase: generation_pretraining
+  mgmp_assets_from_checkpoint: false
+  mgmp_prior_dir: ${oc.env:MANEUVERFLOW_MGMP_PRIOR_DIR}
+  m3f_training_proposal_count: 6
+  auxiliary_loss_weight: 1.0
+  m3f_loss_weight: 4.0
+  verification_loss_weight: 0.0
+  refinement_loss_weight: 0.0
+  weight_decay: 0.1
+  warmup_epochs: 3
+  max_epochs: ${oc.decode:${oc.env:MANEUVERFLOW_STAGE1_MAX_EPOCHS,100}}
+
+trajectory_sampling:
+  _target_: nuplan.planning.simulation.trajectory.trajectory_sampling.TrajectorySampling
+  _convert_: all
+  time_horizon: 4
+  interval_length: 0.5
+
+checkpoint_path: null
+lr: 4.0e-4
+initialize_from_checkpoint: false

@@ -1,0 +1,20 @@
+hydra:
+  run:
+    dir: ${output_dir}
+  output_subdir: ${output_dir}/code/hydra
+  searchpath:
+    - pkg://navsim.planning.script.config.common
+  job:
+    chdir: false
+
+defaults:
+  - default_common
+  - agent: maneuverflow_agent
+  - _self_
+  - override train_test_split: navtest
+
+team_name: ???
+authors: ???
+email: ???
+institution: ???
+country: ???

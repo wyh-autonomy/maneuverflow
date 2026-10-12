@@ -1,0 +1,39 @@
+_target_: navsim.agents.maneuverflow.agent.ManeuverFlowAgent
+_convert_: all
+
+config:
+  _target_: navsim.agents.maneuverflow.config.ManeuverFlowConfig
+  _convert_: all
+  training_phase: joint_finetuning
+  mgmp_assets_from_checkpoint: true
+  m3f_training_proposal_count: 6
+  auxiliary_loss_weight: 1.0
+  m3f_loss_weight: 4.0
+  verification_loss_weight: 2.0
+  refinement_loss_weight: 2.0
+
+  # Static scene artifacts score fresh candidates drawn from the online model.
+  metric_cache_path: ${oc.env:MANEUVERFLOW_METRIC_CACHE}
+  ema_target_decay: 0.999
+  ema_target_buffer_policy: copy
+  # The fixed config constants keep 64 candidates and future loss 0.5
+  # throughout Stage 2 (decay epochs = 0).
+
+  ecfr_max_ds: 1.4
+  ecfr_max_dl: 0.9
+  ecfr_max_dpsi: 0.35
+  weight_decay: 0.1
+  warmup_epochs: 3
+  joint_generation_lr_multiplier: 0.2
+  max_epochs: ${oc.decode:${oc.env:MANEUVERFLOW_JOINT_MAX_EPOCHS,20}}
+
+trajectory_sampling:
+  _target_: nuplan.planning.simulation.trajectory.trajectory_sampling.TrajectorySampling
+  _convert_: all
+  time_horizon: 4
+  interval_length: 0.5
+
+# Full interrupted-run resume uses resume_ckpt_path and disables this handoff.
+checkpoint_path: ${oc.env:MANEUVERFLOW_STAGE1_CHECKPOINT,null}
+lr: 2.0e-4
+initialize_from_checkpoint: true

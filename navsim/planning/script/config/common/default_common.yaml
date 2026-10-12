@@ -1,0 +1,19 @@
+defaults:
+  - train_test_split: ???
+  - worker: ray_distributed_no_torch
+  - _self_
+
+experiment_name: ???
+navsim_log_path: ${oc.env:OPENSCENE_DATA_ROOT}/navsim_logs/${train_test_split.data_split}
+sensor_blobs_path: ${oc.env:OPENSCENE_DATA_ROOT}/sensor_blobs/${train_test_split.data_split}
+date_format: '%Y.%m.%d.%H.%M.%S'
+experiment_uid: ${now:${date_format}}
+output_dir: ${oc.env:NAVSIM_EXP_ROOT}/${experiment_name}/${experiment_uid}
+
+distributed_timeout_seconds: 7200
+selected_simulation_metrics: null
+verbose: false
+logger_level: info
+logger_format_string: null
+max_number_of_workers: null
+gpu: true

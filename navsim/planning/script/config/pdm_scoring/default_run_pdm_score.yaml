@@ -1,0 +1,17 @@
+hydra:
+  run:
+    dir: ${output_dir}
+  output_subdir: ${output_dir}/code/hydra
+  searchpath:
+    - pkg://navsim.planning.script.config.common
+  job:
+    chdir: false
+
+defaults:
+  - default_common
+  - default_scoring_parameters
+  - agent: maneuverflow_agent
+  - _self_
+  - override train_test_split: navtest
+
+metric_cache_path: ${oc.env:NAVSIM_EXP_ROOT}/metric_cache

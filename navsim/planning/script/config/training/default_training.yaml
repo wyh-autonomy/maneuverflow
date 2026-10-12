@@ -1,0 +1,49 @@
+hydra:
+  run:
+    dir: ${output_dir}
+  output_subdir: ${output_dir}/code/hydra
+  searchpath:
+    - pkg://navsim.planning.script.config.common
+  job:
+    chdir: false
+
+defaults:
+  - default_common
+  - default_train_val_test_log_split
+  - agent: maneuverflow_generation_pretraining
+  - _self_
+
+cache_path: ${oc.env:MANEUVERFLOW_TRAIN_CACHE,${oc.env:NAVSIM_EXP_ROOT}/training_cache}
+use_cache_without_dataset: false
+force_cache_computation: false
+resume_ckpt_path: null
+seed: 0
+
+dataloader:
+  params:
+    batch_size: 8
+    num_workers: 4
+    pin_memory: true
+    prefetch_factor: 2
+
+trainer:
+  params:
+    max_epochs: ${agent.config.max_epochs}
+    check_val_every_n_epoch: 1
+    val_check_interval: 1.0
+    limit_train_batches: 1.0
+    limit_val_batches: 1.0
+    accelerator: gpu
+    # Rank-local batches may leave some maneuver experts unused.
+    strategy: ddp_find_unused_parameters_true
+    precision: 32-true
+    # Validation computes the M3F JVP; inference_mode would zero its derivative.
+    inference_mode: false
+    devices: 4
+    num_nodes: 1
+    num_sanity_val_steps: 0
+    fast_dev_run: false
+    accumulate_grad_batches: 1
+    gradient_clip_val: 1.0
+    gradient_clip_algorithm: norm
+    default_root_dir: ${output_dir}
